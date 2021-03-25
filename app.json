@@ -1,0 +1,246 @@
+{
+  "name": "FeaRUbot",
+  "description": "[FeaRUbot] Sebuah userbot Telegram modular yang berjalan pada Python 3.8+ dengan database sqlalchemy.",
+  "logo": "https://i.ibb.co/wQqn7gb/logo-fsp.jpg",
+  "keywords": [
+    "telegram",
+    "userbot",
+    "plugin",
+    "modular",
+    "productivity"
+  ],
+  "repository": "https://github.com/FS-Project/FeaRUbot",
+  "website": "",
+  "success_url": "https://t.me/Fernans1",
+  "stack": "container",
+  "env": {
+    "API_KEY": {
+      "description": "Dapatkan Value Ini Di my.telegram.org.",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Dapatkan Value Ini Di my.telegram.org.",
+      "required": true
+    },
+     "STRING_SESSION": {
+      "description": "Dapatkan ini dengan menjalankan [python3 string_session.py] di termux atau terminal anda.",
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "description": "Tambahkan nama app Heroku di sini. Ini membantu untuk update userbot.",
+      "required": true
+    },
+    "HEROKU_API_KEY": {
+      "description": "API Key Heroku Anda, dapatkan dari 'https://dashboard.heroku.com/account'.",
+      "required": true
+    },
+    "BOTLOG": {
+      "description": "Jika Anda ingin mematikan log, isi False.",
+      "value": "True atau False",
+      "required": true
+    },
+    "BOTLOG_CHATID": {
+      "description": "ChatID dari grup Log. Setel ke '0' jika BOTLOG = False dan atau jika LOGSPAMMER = False.",
+      "value": "0",
+      "required": true
+    },
+    "CONSOLE_LOGGER_VERBOSE": {
+      "description": "True Jika Anda membutuhkan log verbose.",
+      "value": "False"
+    },
+    "QUOTES_API_TOKEN": {
+      "description": "Dapatkan value ini dari 'http://antiddos.systems'! Tolong jangan mencuri!.",
+      "required": false
+    },
+    "GENIUS_ACCESS_TOKEN": {
+      "description": "Dapatkan Token Akses Klien dari 'https://genius.com/api-clients'.",
+      "required": false
+    },
+    "MONGO_URI": {
+      "description": "URL MongoDB Anda, Dapatkan panduan Anda dari 'https://telegra.ph/Mongo-DB-12-24'.",
+      "required": false
+    },
+    "GENIUS": {
+      "description": "Dapatkan value ini dari 'https://genius.com/developers', Pada dasarnya sama dengan GENIUS_API_TOKEN.",
+      "required": false
+    },
+    "GITHUB_ACCESS_TOKEN": {
+      "description": "GITHUB_ACCESS_TOKEN, Anda bisa dapatkan dari 'https://github.com/settings/tokens'",
+      "required": false
+    },
+    "GIT_REPO_NAME": {
+      "description": "Tambahkan GIT_REPO_NAME disini.",
+      "required": false
+    },
+    "COUNTRY": {
+      "description": "Isi dengan kode negara kamu, ini digunakan untuk commands .time dan .date.",
+      "value": "ID",
+      "required": true
+    },
+    "TZ_NUMBER": {
+      "description": "Ubah ke zona waktu tertentu, jika negara kamu memiliki lebih dari satu zona waktu.",
+      "value": "1",
+      "required": false
+    },
+    "OPEN_WEATHER_MAP_APPID": {
+      "description": "Dapatkan APPID (API key) Anda dari https://api.openweathermap.org/data/2.5/weather",
+      "required": false
+    },
+    "PM_AUTO_BAN": {
+      "description": "Isi False jika tidak ingin memakai fitur ini dan Sebaliknya.",
+      "value": "True",
+      "required": true
+    },
+    "YOUTUBE_API_KEY": {
+      "description": "API Key YouTube untuk command .yt dapatkan dari https://console.cloud.google.com",
+      "required": false
+    },
+    "OCR_SPACE_API_KEY": {
+      "description": "OCR API Key untuk command .ocr dapatkan dari https://ocr.space/ocrapi",
+      "required": false
+    },
+    "REM_BG_API_KEY": {
+      "description": "API Key untuk command .rbg Dapatkan dari https://www.remove.bg/api",
+      "required": false
+    },
+    "ANTI_SPAMBOT": {
+      "description": "Kick seseorang jika terdaftar sebagai daftar pengguna spam. [Anda Harus admin]",
+      "value": "True",
+      "required": false
+    },
+    "ANTI_SPAMBOT_SHOUT": {
+      "description": "Melaporkan pengguna sebagai spam ke admin, hanya untuk menjaga-jaga jika anda bukan admin.",
+      "value": "True",
+      "required": false
+    },
+    "TMP_DOWNLOAD_DIRECTORY": {
+      "description": "Lokasi unduhan untuk modul (GDrive, .download dll..)",
+      "value": "./downloads/",
+      "required": false
+    },
+    "CLEAN_WELCOME": {
+      "description": "Ketika orang baru bergabung, pesan selamat datang yang lama dihapus.",
+      "value": "True",
+      "required": false
+    },
+    "G_DRIVE_FOLDER_ID": {
+      "description": "Isi id folder / tautan folder yang anda inginkan sebagai jalur mirror.",
+      "required": false
+    },
+    "HEROKU_MEMEZ": {
+      "description": "Ini harus True jika userbot berjalan pada Heroku.",
+      "value": "True",
+      "required": true
+    },
+    "LASTFM_API": {
+      "description": "API Key untuk modul Last.FM [Dapatkan dari - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_SECRET": {
+      "description": "SECRET Key untuk modul Last.FM [Dapatkan dari - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_USERNAME": {
+      "description": "Masukan Username last.FM anda.",
+      "required": false
+    },
+    "LASTFM_PASSWORD": {
+      "description": "Masukan password last.FM anda.",
+      "required": false
+    },
+    "BIO_PREFIX": {
+      "description": "Bio untuk Modul Last.FM.",
+      "required": false
+    },
+    "DEFAULT_BIO": {
+      "description": "Isi bio anda.",
+      "required": false
+    },
+    "ALIVE_NAME": {
+      "description": "Isi nama untuk dilihat saat .alive",
+      "required": false
+    },
+    "S_PACK_NAME": {
+      "description": "Ganti nama pack stiker anda.",
+      "required": false
+    },
+    "G_BAN_LOGGER_GROUP": {
+      "description": "Tambahkan semua sudo bot di grup Anda dan ketik id grup itu.",
+      "required": false
+    },
+    "G_DRIVE_DATA": {
+      "description": "Masukkan Google Drive authentication data,yang berupa file JSON.",
+      "required": false
+    },
+    "G_PHOTOS_CLIENT_ID": {
+      "description": "Dapatkan dari https://j.mp/39lWQQm.",
+      "required": false
+    },
+    "G_PHOTOS_CLIENT_SECRET": {
+      "description": "Dapatkan dari https://j.mp/39lWQQm.",
+      "required": false
+    },
+    "BITLY_TOKEN": {
+      "description": "API key Bit.ly Anda, dapatkan dari 'https://bitly.com/a/sign_up'.",
+      "value": "",
+      "required": false
+    },
+    "UB_BLACK_LIST_CHAT": {
+      "description": "Tambah Blacklist Chat Disini.",
+      "required": false
+    },
+    "LYDIA_API_KEY": {
+      "description": "Modul ini Membutuhkan API CoffeeHouse agar berfungsi. Dapatkan dengan cara, bergabung ke grup https://t.me/IntellivoidDiscussions dan kirim #activateapi dan ikuti instruksinya.",
+      "required": false
+    },
+    "WEATHER_DEFCITY": {
+      "description": "Setel kota default untuk modul cuaca userbot.",
+      "required": false
+    },
+    "LOGSPAMMER": {
+      "description": "Setel ini ke True jika Anda ingin log error disimpan di grup log, memerlukan BOTLOG_CHATID yang valid.",
+      "value": "True",
+      "required": true
+    },
+    "DEEZER_ARL_TOKEN": {
+      "description": "Masukkan DEEZER ARL TOKEN Anda https://notabug.org/RemixDevs/DeezloaderRemix/wiki/Login+via+userToken.",
+      "required": false
+    },
+    "UPSTREAM_REPO_URL": {
+      "description": "Isi dengan repo github FeaRUbot supaya dapat update.",
+      "required": false
+    },
+    "BOT_TOKEN": {
+      "description": "Dapatkan token dari @BotFather.",
+      "required": false
+    },
+    "BOT_USERNAME": {
+      "description": "Nama pengguna bot yang Anda buat dengan @BotFather.",
+      "required": false
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "12"
+      }
+    }
+  ],"buildpacks": [{
+    "url": "https://github.com/heroku/heroku-buildpack-python.git"
+  }, {
+    "url": "https://github.com/heroku/heroku-buildpack-redis"
+  }, {
+    "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+  }, {
+    "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
+  },{
+    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  }, {
+    "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
+  }, {
+    "url": "https://github.com/amivin/aria2-heroku"
+  }, {
+    "url": "https://github.com/stevo550/buildpack-slug-cleaner"
+  }]
+}
