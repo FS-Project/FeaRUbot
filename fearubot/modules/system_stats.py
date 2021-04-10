@@ -6,6 +6,7 @@
 #
 """ Userbot module for getting information about the server. """
 
+import os
 import asyncio
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
@@ -26,6 +27,7 @@ from fearubot.events import register
 
 # ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
+UBVER = os.environ.get("USERBOT_VERSION")
 # ============================================
 
 
@@ -137,44 +139,41 @@ async def sysdetails(sysd):
             await sysd.edit("Install neofetch dahulu!!")
 
 
-@register(outgoing=True, pattern=r"^\.botver$")
+@register(outgoing=True, pattern="^.botver$")
 async def bot_ver(event):
-    if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
-        return
-    if which("git") is not None:
-        ver = await asyncrunapp(
-            "git",
-            "describe",
-            "--all",
-            "--long",
-            stdout=asyncPIPE,
-            stderr=asyncPIPE,
-        )
-        stdout, stderr = await ver.communicate()
-        verout = str(stdout.decode().strip()) + str(stderr.decode().strip())
+    """ For .botver command, get the bot version. """
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
+        if which("git") is not None:
+            ver = await asyncrunapp(
+                "git",
+                "describe",
+                "--all",
+                "--long",
+                stdout=asyncPIPE,
+                stderr=asyncPIPE,
+            )
+            stdout, stderr = await ver.communicate()
+            verout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
-        rev = await asyncrunapp(
-            "git",
-            "rev-list",
-            "--all",
-            "--count",
-            stdout=asyncPIPE,
-            stderr=asyncPIPE,
-        )
-        stdout, stderr = await rev.communicate()
-        revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            rev = await asyncrunapp(
+                "git",
+                "rev-list",
+                "--all",
+                "--count",
+                stdout=asyncPIPE,
+                stderr=asyncPIPE,
+            )
+            stdout, stderr = await rev.communicate()
+            revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
 
-        await event.edit(
-            "` Userbot Version: \n "
-            f"{verout}"
-            "` \n"
-            "   Revision: "
-            f"{revout}🇲🇨\n"
-        )
-    else:
-        await event.edit(
-            "Shame that you don't have git, you're running - 'v1.0' anyway!"
-        )
+            await event.edit(
+                "Versi FeaRUbot: " f"{verout}" " \n" "Revision: " f"{revout}" ""
+            )
+        else:
+            await event.edit(
+                "Shame that you don't have git, you're running - 'v1.0' anyway!"
+            )
+
 
 
 @register(outgoing=True, pattern=r"^\.pip(?: |$)(.*)")
@@ -232,16 +231,16 @@ async def amireallyalive(alive):
     output = (
         "`Userbot FeaRUbot berjalan...`\n"
         "╭━━━⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷\n"
-        f"• 👤 Pengguna    : {DEFAULTUSER} \n"
-        f"• 👁‍🗨 Username    : @{user.username}\n"
-        f"• 🧸 V. FeaRUbot : v {USERBOT_VERSION}\n"
+        f"• 👤 Pengguna-----: {DEFAULTUSER} \n"
+        f"• 👁‍🗨 Username-----: @{user.username}\n"
+        f"• 🧸 V. FeaRUbot--: v {USERBOT_VERSION}\n"
         "⊷⊷⊷⊷⊷⊷⊷\n"
-        f"• 🗂 Branch    : {UPSTREAM_REPO_BRANCH} \n"
-        f"• ⚙️ Telethon  : v {version.__version__} \n"
-        f"• 🐍 Python    : v {python_version()} \n"
+        f"• 🗂 Branch---: {UPSTREAM_REPO_BRANCH} \n"
+        f"• ⚙️ Telethon--: v {version.__version__} \n"
+        f"• 🐍 Python---: v {python_version()} \n"
         "⊷⊷⊷⊷⊷⊷⊷\n"
-        f"• 🕒 Bot Aktif    : {uptime} \n"
-        f"• 🗃 Modul dimuat : {len(modules)} \n"
+        f"• 🕒 Bot Aktif-----: {uptime} \n"
+        f"• 🗃 Modul dimuat--: {len(modules)} \n"
         "⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷⊷━━━╯ \n"
     )
     if ALIVE_LOGO:

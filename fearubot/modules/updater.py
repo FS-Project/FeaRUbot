@@ -35,7 +35,7 @@ requirements_path = path.join(
 
 async def gen_chlog(repo, diff):
     ch_log = ""
-    d_form = "%d/%m/%y"
+    d_form = "%h/%m/%t"
     for c in repo.iter_commits(diff):
         ch_log += (
             f"•[{c.committed_datetime.strftime(d_form)}]: {c.summary} <{c.author}>\n"
@@ -94,9 +94,9 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         try:
             remote.push(refspec="HEAD:refs/heads/master", force=True)
         except GitCommandError as error:
-            await event.edit(f"{txt}\n`Here is the error log:\n{error}`")
+            await event.edit(f"{txt}\nIni adalah log **Error**:\n{error}")
             return repo.__del__()
-        await event.edit("*Update Berhasil☑️!\n" "Sedang Mulai Ulang, Harap Tunggu...*")
+        await event.edit("**Update Berhasil**☑️!\n" "**Sedang Mulai Ulang, Harap Tunggu...**")
 
         if BOTLOG:
             await event.client.send_message(
@@ -132,13 +132,13 @@ async def update(event, repo, ups_rem, ac_br):
 @register(outgoing=True, pattern=r"^.update(?: |$)(now|deploy)?")
 async def upstream(event):
     "For .update command, check if the bot is up to date, update if specified"
-    await event.edit("*Memeriksa update, harap tunggu....*")
+    await event.edit("**Memeriksa update, harap tunggu....**")
     conf = event.pattern_match.group(1)
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     try:
-        txt = "*Ups.. Updater tidak dapat melanjutkan karena "
-        txt += "terjadi beberapa masalah*\n\n**LOGTRACE:**\n"
+        txt = "**Ups.. Updater tidak dapat melanjutkan karena "
+        txt += "*terjadi beberapa masalah**\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
         await event.edit(f"{txt}\ndirectory {error} tidak ditemukan")
@@ -149,14 +149,14 @@ async def upstream(event):
     except InvalidGitRepositoryError as error:
         if conf is None:
             return await event.edit(
-                f"**Sayangnya, direktori {error} tampaknya bukan repositori git tapi."
-                "\nbisa memperbaikinya dengan memperbarui paksa userbot menggunakan .update now.**"
+                f"**Sayangnya, direktori {error} tampaknya bukan repositori git tapi**."
+                "\n**bisa memperbaikinya dengan memperbarui paksa userbot menggunakan .update now.**"
             )
         repo = Repo.init()
         origin = repo.create_remote("upstream", off_repo)
         origin.fetch()
         force_update = True
-        repo.create_head("master", origin.refs.master)
+        repo.create_head("main", origin.refs.master)
         repo.heads.master.set_tracking_branch(origin.refs.master)
         repo.heads.master.checkout(True)
 
@@ -164,10 +164,10 @@ async def upstream(event):
     if ac_br != UPSTREAM_REPO_BRANCH:
         await event.edit(
             "**[UPDATER]:**\n"
-            f"*Sepertinya Anda menggunakan custom branch Anda sendiri ({ac_br}). "
+            f"**Sepertinya Anda menggunakan custom branch Anda sendiri ({ac_br}). "
             "dalam hal ini, Updater tidak dapat mengidentifikasi "
             "branch mana yang akan digabungkan. "
-            "silakan gunakan branch resmi*"
+            "silakan gunakan branch resmi**"
         )
         return repo.__del__()
     try:
@@ -182,7 +182,7 @@ async def upstream(event):
 
     if changelog == "" and force_update is False:
         await event.edit(
-            f"\n**FearUBot anda sudah terbaru, dengan branch** **{UPSTREAM_REPO_BRANCH}**\n"
+            f"\n**FeaRUbot anda sudah terbaru, dengan branch** **{UPSTREAM_REPO_BRANCH}**\n"
         )
         return repo.__del__()
 
@@ -191,7 +191,7 @@ async def upstream(event):
             f"**Update tersedia untuk [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`"
         )
         if len(changelog_str) > 4096:
-            await event.edit("*Changelog terlalu besar, buka file untuk melihatnya.*")
+            await event.edit("**Changelog terlalu besar, buka file untuk melihatnya.**")
             file = open("output.txt", "w+")
             file.write(changelog_str)
             file.close()
@@ -207,10 +207,10 @@ async def upstream(event):
 
     if force_update:
         await event.edit(
-            "*Memperbarui FeaRUbot secara paksa ke versi terbaru, harap tunggu...*"
+            "**Memperbarui FeaRUbot secara paksa ke versi terbaru, harap tunggu...**"
         )
     else:
-        await event.edit("*Sedang update FeaRUbot, Harap Tunggu....*")
+        await event.edit("**Sedang update FeaRUbot, Harap Tunggu....**")
     if conf == "now":
         await update(event, repo, ups_rem, ac_br)
     elif conf == "deploy":
@@ -221,10 +221,10 @@ async def upstream(event):
 CMD_HELP.update(
     {
         "update": ".update"
-        "\n*Penggunaan: Memeriksa apakah ada update pada userbot dan menampilkan changelog jika ada update.*"
+        "\nPenggunaan: Memeriksa apakah ada update pada FeaRUbot dan menampilkan changelog jika ada update."
         "\n\n.update now"
-        "\n*Penggunaan: Perbarui userbot Anda, jika ada pembaruan di repositori userbot Anda.*"
+        "\nPenggunaan: Perbarui FeaRUbot Anda, jika ada pembaruan di repositori FeaRUbot Anda."
         "\n\n.update deploy"
-        "\n*Penggunaan: Deploy userbot Anda di heroku, jika ada pembaruan di repositori userbot Anda.*"
+        "\nPenggunaan: Deploy FeaRUbot Anda di heroku, jika ada pembaruan di repositori FeaRUbot Anda."
     }
 )

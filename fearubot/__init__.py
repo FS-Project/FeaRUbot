@@ -50,7 +50,7 @@ LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 8:
     LOGS.info(
-        "Anda HARUS meakai versi python minimal 3.8"
+        "Anda HARUS memakai versi python minimal 3.8"
         "Beberapa fitur bergantung pada ini. Bot dihentikan."
     )
     quit(1)
@@ -139,7 +139,7 @@ ANTI_SPAMBOT_SHOUT = sb(os.environ.get("ANTI_SPAMBOT_SHOUT") or "True")
 ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 
 # Default .alive logo
-ALIVE_LOGO = os.environ.get("ALIVE_LOGO") or "https://i.ibb.co/9Ns5jsZ/logo-fearubot.jpg"
+ALIVE_LOGO = os.environ.get("ALIVE_LOGO") or "https://i.ibb.co/NZsnpt6/fear.png"
 
 # Time & Date - Country and Time Zone
 COUNTRY = str(os.environ.get("COUNTRY") or "ID")
@@ -152,7 +152,7 @@ USERBOT_VERSION = os.environ.get("USERBOT_VERSION") or "1.0"
 USER_TERM_ALIAS = os.environ.get("USER_TERM_ALIAS") or "FeaRUbot"
 
 # Updater alias
-UPDATER_ALIAS = os.environ.get("UPDATER_ALIAS") or "FeRuBoT"
+UPDATER_ALIAS = os.environ.get("UPDATER_ALIAS") or "FeaRUbot"
 
 # Zipfile module
 ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY") or "./zips"

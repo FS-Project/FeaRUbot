@@ -1,4 +1,3 @@
-# INFO : ini merupakan copy source code dari repo one4ubot, dan sudah mendapatkan izin dari pemilik.
 # INFO : This is a copy of the source code from the One4ubot repo, and has the permission of the owner.
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
@@ -28,7 +27,7 @@ DEFAULTUSER = os.environ.get("ALIVE_NAME")
 
 # ========================= CONSTANTS ============================
 DEF_UNAPPROVED_MSG = (
-    f" Hello, Ada apa? {DEFAULTUSER} lagi offline!\n"
+    f" Halo, Ada apa? {DEFAULTUSER} lagi offline!\n"
     " Jika sangat penting silahkan ketik yang anda inginkan "
     " dan **jangan spam jika tidak mau ter-block otomatis**\n\n"
     " - Protected By **FeaRUserbot**")
@@ -89,7 +88,7 @@ async def permitpm(event):
 
             if COUNT_PM[event.chat_id] > 4:
                 await event.respond(
-                        " **HEII, JANGAN SPAM, ANDA AKAN SAYA BLOCKIR!!**\n\n"
+                        " **HEII, JANGAN SPAM, ANDA AKAN TERBLOCKIR!!**\n\n"
                         "- Protected By **FeaRUserbot**")
 
                 try:
@@ -134,8 +133,8 @@ async def auto_accept(event):
         and not (await event.get_sender()).bot
     ):
         try:
-            from userbot.modules.sql_helper.globals import gvarstatus
-            from userbot.modules.sql_helper.pm_permit_sql import approve, is_approved
+            from fearubot.modules.sql_helper.globals import gvarstatus
+            from fearubot.modules.sql_helper.pm_permit_sql import approve, is_approved
         except AttributeError:
             return
 
@@ -175,7 +174,7 @@ async def auto_accept(event):
 async def notifoff(noff_event):
     """ For .notifoff command, stop getting notifications from unapproved PMs. """
     try:
-        from userbot.modules.sql_helper.globals import addgvar
+        from fearubot.modules.sql_helper.globals import addgvar
     except AttributeError:
         await noff_event.edit("*Berjalan pada mode Non-SQL!*")
         return
@@ -187,7 +186,7 @@ async def notifoff(noff_event):
 async def notifon(non_event):
     """ For .notifoff command, get notifications from unapproved PMs. """
     try:
-        from userbot.modules.sql_helper.globals import delgvar
+        from fearubot.modules.sql_helper.globals import delgvar
     except AttributeError:
         await non_event.edit("*Berjalan pada mode Non-SQL!*")
         return
@@ -199,10 +198,10 @@ async def notifon(non_event):
 async def approvepm(apprvpm):
     """ For .approve command, give someone the permissions to PM you. """
     try:
-        from userbot.modules.sql_helper.globals import gvarstatus
-        from userbot.modules.sql_helper.pm_permit_sql import approve
+        from fearubot.modules.sql_helper.globals import gvarstatus
+        from fearubot.modules.sql_helper.pm_permit_sql import approve
     except AttributeError:
-        await apprvpm.edit("*Berjalan pada mode Non-SQL!*")
+        await apprvpm.edit("Berjalan pada mode Non-SQL!")
         return
 
     if apprvpm.reply_to_msg_id:
@@ -232,7 +231,7 @@ async def approvepm(apprvpm):
     try:
         approve(uid)
     except IntegrityError:
-        await apprvpm.edit("*Pengguna telah di izinkan PM.*")
+        await apprvpm.edit("Pengguna telah di izinkan PM.")
         return
 
     await apprvpm.edit(f"[{name0}](tg://user?id={uid}) *diizinkan PM!*")
@@ -247,9 +246,9 @@ async def approvepm(apprvpm):
 @register(outgoing=True, pattern=r"^.disapprove$")
 async def disapprovepm(disapprvpm):
     try:
-        from userbot.modules.sql_helper.pm_permit_sql import dissprove
+        from fearubot.modules.sql_helper.pm_permit_sql import dissprove
     except BaseException:
-        await disapprvpm.edit("*Berjalan pada mode Non-SQL!*")
+        await disapprvpm.edit("Berjalan pada mode Non-SQL!")
         return
 
     if disapprvpm.reply_to_msg_id:
@@ -264,14 +263,14 @@ async def disapprovepm(disapprvpm):
         name0 = str(aname.first_name)
 
     await disapprvpm.edit(
-        f"[{name0}](tg://user?id={disapprvpm.chat_id}) `Membatalkan izin PM!`"
+        f"[{name0}](tg://user?id={disapprvpm.chat_id}) Membatalkan izin PM!"
     )
 
     if BOTLOG:
         await disapprvpm.client.send_message(
             BOTLOG_CHATID,
             f"[{name0}](tg://user?id={disapprvpm.chat_id})"
-            " *Telah dilarang PM.*",
+            " Telah dilarang PM.",
         )
 
 
@@ -284,17 +283,17 @@ async def blockpm(block):
         aname = replied_user.id
         name0 = str(replied_user.first_name)
         await block.client(BlockRequest(aname))
-        await block.edit("*Anda saya block selamat tinggal!*")
+        await block.edit("Anda saya block selamat tinggal!")
         uid = replied_user.id
     else:
         await block.client(BlockRequest(block.chat_id))
         aname = await block.client.get_entity(block.chat_id)
-        await block.edit("*Anda saya block selamat tinggal!*")
+        await block.edit("Anda saya block selamat tinggal!")
         name0 = str(aname.first_name)
         uid = block.chat_id
 
     try:
-        from userbot.modules.sql_helper.pm_permit_sql import dissprove
+        from fearubot.modules.sql_helper.pm_permit_sql import dissprove
 
         dissprove(uid)
     except AttributeError:
@@ -315,12 +314,12 @@ async def unblockpm(unblock):
         replied_user = await unblock.client.get_entity(reply.from_id)
         name0 = str(replied_user.first_name)
         await unblock.client(UnblockRequest(replied_user.id))
-        await unblock.edit("*Anda telah di unblock!.*")
+        await unblock.edit("Anda telah di unblock!.")
 
     if BOTLOG:
         await unblock.client.send_message(
             BOTLOG_CHATID,
-            f"[{name0}](tg://user?id={replied_user.id})" " *sudah di unblock!*",
+            f"[{name0}](tg://user?id={replied_user.id})" " sudah di unblock!",
         )
 
 
@@ -328,14 +327,14 @@ async def unblockpm(unblock):
 async def add_pmsg(cust_msg):
     """ Set your own Unapproved message. """
     if not PM_AUTO_BAN:
-        return await cust_msg.edit("*Isi PM_AUTO_BAN pada variable menjadi = True*")
+        return await cust_msg.edit("Isi PM_AUTO_BAN pada variable menjadi = True")
     try:
-        import userbot.modules.sql_helper.globals as sql
+        import fearubot.modules.sql_helper.globals as sql
     except AttributeError:
-        await cust_msg.edit("*Berjalan pada mode Non-SQL!*")
+        await cust_msg.edit("Berjalan pada mode Non-SQL!")
         return
 
-    await cust_msg.edit("*Prosesss...*")
+    await cust_msg.edit("Prosesss...")
     conf = cust_msg.pattern_match.group(1)
 
     custom_message = sql.gvarstatus("unapproved_msg")
@@ -356,9 +355,9 @@ async def add_pmsg(cust_msg):
             msg = message.message  # get the plain text
             sql.addgvar("unapproved_msg", msg)
         else:
-            return await cust_msg.edit("*Balas ke pesan!*")
+            return await cust_msg.edit("Balas ke pesan!")
 
-        await cust_msg.edit("*Pesan disimpan sebagai pesan yang tidak disetujui*")
+        await cust_msg.edit("Pesan disimpan sebagai pesan yang tidak disetujui")
 
         if BOTLOG:
             await cust_msg.client.send_message(
@@ -368,9 +367,9 @@ async def add_pmsg(cust_msg):
     if conf.lower() == "reset":
         if custom_message is not None:
             sql.delgvar("unapproved_msg")
-            await cust_msg.edit("*Pesan yang tidak disetujui disetel ulang ke default*")
+            await cust_msg.edit("Pesan yang tidak disetujui disetel ulang ke default")
         else:
-            await cust_msg.edit("*Anda belum menyetel pesan khusus*")
+            await cust_msg.edit("Anda belum menyetel pesan khusus")
 
     if conf.lower() == "get":
         if custom_message is not None:
@@ -380,7 +379,7 @@ async def add_pmsg(cust_msg):
         else:
             await cust_msg.edit(
                 "*Anda belum menyetel pesan untuk orang yang belum di approve\n"
-                f"Menggunakan pesan default*: \n\n`{DEF_UNAPPROVED_MSG}`"
+                f"Menggunakan pesan default: \n\n`{DEF_UNAPPROVED_MSG}`"
             )
 
 
@@ -388,25 +387,25 @@ CMD_HELP.update(
     {
         "pmpermit": "\
 .approve\
-\n*Penggunaan: Menyetujui orang melakukan PM.*\
+\nPenggunaan: Menyetujui orang melakukan PM.\
 \n\n.disapprove\
-\n*Penggunaan: Menolak orang melakukan PM.*\
+\nPenggunaan: Menolak orang melakukan PM.\
 \n\n.block\
-\n*Penggunaan: Block seseorang.*\
+\nPenggunaan: Block seseorang.\
 \n\n.unblock\
-\n*Penggunann: Meng-unblock seseorang agar bisa PM anda.*\
+\nPenggunann: Meng-unblock seseorang agar bisa PM anda.\
 \n\n.notifoff\
-\n*Penggunann: Menghapus/Menonaktifkan pemberitahuan apa pun dari PM yang tidak disetujui.*\
+\nPenggunann: Menghapus/Menonaktifkan pemberitahuan apa pun dari PM yang tidak disetujui.\
 \n\n.notifon\
-\n*Penggunann: Izinkan pemberitahuan untuk PM yang tidak disetujui.*\
+\nPenggunann: Izinkan pemberitahuan untuk PM yang tidak disetujui.\
 \n\n.set pm_msg <reply to msg>\
-\n*Penggunann: Mengatur pesan khusus, akan terlihat bila seseorang PM anda sebelum di Approve*\
+\nPenggunann: Mengatur pesan khusus, akan terlihat bila seseorang PM anda sebelum di Approve\
 \n\n.get pm_msg\
-\n*Penggunann: Melihat pesan khusus anda ketika di PM*\
+\nPenggunann: Melihat pesan khusus anda ketika di PM\
 \n\n.reset pm_msg\
-\n*Penggunann: Menghapus pesan kostum anda ketika di PM*\
-\n\n*Pesan khusus yang tidak disetujui saat ini tidak dapat menyetel teks berformat*\
+\nPenggunann: Menghapus pesan kostum anda ketika di PM\
+\n\nPesan khusus yang tidak disetujui saat ini tidak dapat menyetel teks berformat\
 \nseperti cetak tebal, garis bawah, tautan, dll. .\
-\nPesan hanya akan dikirim dalam monoscape*"
+\nPesan hanya akan dikirim dalam monoscape"
     }
 )

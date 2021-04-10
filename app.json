@@ -1,16 +1,10 @@
 {
   "name": "FeaRUbot",
   "description": "[FeaRUbot] Sebuah userbot Telegram modular yang berjalan pada Python 3.8+ dengan database sqlalchemy.",
-  "logo": "https://i.ibb.co/wQqn7gb/logo-fsp.jpg",
-  "keywords": [
-    "telegram",
-    "userbot",
-    "plugin",
-    "modular",
-    "productivity"
-  ],
+  "logo": "https://i.ibb.co/9Ns5jsZ/logo-fearubot.jpg",
+  "keywords": ["telegram", "userbot", "plugin", "modular", "productivity"],
   "repository": "https://github.com/FS-Project/FeaRUbot",
-  "website": "",
+  "website": "https://fs-project.github.io",
   "success_url": "https://t.me/Fernans1",
   "stack": "container",
   "env": {
@@ -22,7 +16,7 @@
       "description": "Dapatkan Value Ini Di my.telegram.org.",
       "required": true
     },
-     "STRING_SESSION": {
+    "STRING_SESSION": {
       "description": "Dapatkan ini dengan menjalankan [python3 string_session.py] di termux atau terminal anda.",
       "required": true
     },
@@ -226,21 +220,31 @@
         "version": "12"
       }
     }
-  ],"buildpacks": [{
-    "url": "https://github.com/heroku/heroku-buildpack-python.git"
-  }, {
-    "url": "https://github.com/heroku/heroku-buildpack-redis"
-  }, {
-    "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
-  }, {
-    "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
-  },{
-    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-  }, {
-    "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
-  }, {
-    "url": "https://github.com/amivin/aria2-heroku"
-  }, {
-    "url": "https://github.com/stevo550/buildpack-slug-cleaner"
-  }]
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python.git"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-redis"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+    },
+    {
+      "url": "https://github.com/HasibulKabir/heroku-buildpack-rarlab"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
+    },
+    {
+      "url": "https://github.com/amivin/aria2-heroku"
+    },
+    {
+      "url": "https://github.com/stevo550/buildpack-slug-cleaner"
+    }
+  ]
 }
