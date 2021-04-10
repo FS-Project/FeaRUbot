@@ -1,7 +1,7 @@
 # INFO : This is a copy of the source code from the MoveAngel repo, and has the permission of the owner.
 #
 
-FROM ferubot/docker:alpine-latest
+FROM fsprojectt/fearubot:alpine-latest
 
 RUN mkdir /FeaRUbot && chmod 777 /FeaRUbot
 ENV PATH="/FeaRUbot/bin:$PATH"
