@@ -19,7 +19,7 @@ import heroku3
 import requests
 
 from fearubot import BOTLOG, BOTLOG_CHATID, CMD_HELP, HEROKU_API_KEY, HEROKU_APP_NAME
-from userbot.events import register
+from fearubot.events import register
 
 heroku_api = "https://api.heroku.com"
 if HEROKU_APP_NAME is not None and HEROKU_API_KEY is not None:
