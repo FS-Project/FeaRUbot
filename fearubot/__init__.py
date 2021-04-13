@@ -227,6 +227,12 @@ async def check_botlog_chatid():
             "Periksa environment variabel/file config.env Anda.")
         quit(1)
 
+async def check_alive():
+    await bot.send_message(BOTLOG_CHATID, 
+    "`__Aktif__`\n"
+    "**Selamat Userbot FeaRUbot berhasil dikatifkan**"
+    )
+    return
 
 with bot:
     try:
