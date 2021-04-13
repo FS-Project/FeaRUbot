@@ -66,8 +66,8 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         heroku_applications = heroku.apps()
         if HEROKU_APP_NAME is None:
             await event.edit(
-                "**Harap isi variabel HEROKU_APP_NAME"
-                "untuk dapat menerapkan perubahan terbaru.**"
+                "**Harap isi variabel** `HEROKU_APP_NAME`"
+                "**untuk dapat menerapkan perubahan terbaru.**"
             )
             repo.__del__()
             return
@@ -77,7 +77,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
                 break
         if heroku_app is None:
             await event.edit(
-                f"{txt}\n*Kredensial Heroku tidak valid untuk men-deploy userbot.*"
+                f"{txt}\n**Kredensial Heroku tidak valid untuk men-deploy userbot.**"
             )
             return repo.__del__()
         await event.edit("*Sedang proses, harap tunggu...*")
@@ -100,11 +100,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
 
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, "#UPDATE \n" "**UserBot FeaRUbot Anda sudah ter-update, yaaay**"
+                BOTLOG_CHATID, "**#UPDATE** \n" "**UserBot FeaRUbot Anda sudah ter-update, yaaay**"
             )
 
     else:
-        await event.edit("*Harap set variabel HEROKU_API_KEY.*")
+        await event.edit("**Harap set variabel HEROKU_API_KEY.**")
     return
 
 
@@ -115,12 +115,12 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit(
-        "*Update Berhasil☑️!\n" "Sedang Mulai Ulang, Harap Tunggu...*"
+        "**Update Berhasil☑️!**\n" "**Sedang Mulai Ulang, Harap Tunggu...**"
     )
 
     if BOTLOG:
         await event.client.send_message(
-            BOTLOG_CHATID, "#*UPDATE* \n" "*Userbot FeaRUbot Anda sudah ter-update, yaaay*"
+            BOTLOG_CHATID, "#**UPDATE** \n" "**Userbot FeaRUbot Anda sudah ter-update, yaaay**"
         )
 
     # Spin a new instance of bot
@@ -150,7 +150,7 @@ async def upstream(event):
         if conf is None:
             return await event.edit(
                 f"**Sayangnya, direktori {error} tampaknya bukan repositori git tapi**."
-                "\n**bisa memperbaikinya dengan memperbarui paksa userbot menggunakan .update now.**"
+                "\n**bisa diperbaiki dengan memperbarui paksa userbot menggunakan .update now.**"
             )
         repo = Repo.init()
         origin = repo.create_remote("upstream", off_repo)
@@ -223,8 +223,8 @@ CMD_HELP.update(
         "update": ".update"
         "\nPenggunaan: Memeriksa apakah ada update pada FeaRUbot dan menampilkan changelog jika ada update."
         "\n\n.update now"
-        "\nPenggunaan: Perbarui FeaRUbot Anda, jika ada pembaruan di repositori FeaRUbot Anda."
+        "\nPenggunaan: Perbarui FeaRUbot Anda, jika ada pembaruan di repositori FeaRUbot."
         "\n\n.update deploy"
-        "\nPenggunaan: Deploy FeaRUbot Anda di heroku, jika ada pembaruan di repositori FeaRUbot Anda."
+        "\nPenggunaan: Perbarui FeaRUbot Anda di heroku, jika ada pembaruan di repositori FeaRUbot."
     }
 )
