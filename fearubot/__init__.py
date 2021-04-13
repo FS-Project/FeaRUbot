@@ -145,7 +145,7 @@ ALIVE_LOGO = os.environ.get("ALIVE_LOGO") or "https://i.ibb.co/NZsnpt6/fear.png"
 COUNTRY = str(os.environ.get("COUNTRY") or "ID")
 TZ_NUMBER = int(os.environ.get("TZ_NUMBER") or 1)
 
-# Version of FeRuBoT
+# Version of FeaRUbot
 USERBOT_VERSION = os.environ.get("USERBOT_VERSION") or "1.0"
 
 # User Terminal alias
@@ -227,11 +227,9 @@ async def check_botlog_chatid():
             "Periksa environment variabel/file config.env Anda.")
         quit(1)
 
+
 async def check_alive():
-    await bot.send_message(BOTLOG_CHATID, 
-    "`__Aktif__`\n"
-    "**Selamat Userbot FeaRUbot berhasil dikatifkan**"
-    )
+    await bot.send_message(BOTLOG_CHATID, "`__Aktif__`\n**Selamat Userbot FeaRUbot Anda berhasil diaktifkan**")
     return
 
 with bot:
