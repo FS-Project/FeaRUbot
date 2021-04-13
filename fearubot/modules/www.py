@@ -1,4 +1,3 @@
-# INFO : ini merupakan copy source code dari repo one4ubot, dan sudah mendapatkan izin dari pemilik.
 # INFO : This is a copy of the source code from the One4ubot repo, and has the permission of the owner.
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
@@ -13,14 +12,14 @@ from datetime import datetime
 from speedtest import Speedtest
 from telethon import functions
 
-from userbot import CMD_HELP
-from userbot.events import register
+from fearubot import CMD_HELP
+from fearubot.events import register
 
 
 @register(outgoing=True, pattern="^.speed$")
 async def speedtst(spd):
     """ For .speed command, use SpeedTest to check server speeds. """
-    await spd.edit("`Speed tes berjalan . . .`")
+    await spd.edit("**Sedang mengetes kecepatan, Mohon tunggu...**")
     test = Speedtest()
 
     test.get_best_server()
@@ -30,7 +29,7 @@ async def speedtst(spd):
     result = test.results.dict()
 
     await spd.edit(
-        "`"
+        "**"
         "🕐 Dimulai pada "
         f"{result['timestamp']} \n\n"
         "⬇️ Download "
@@ -41,7 +40,7 @@ async def speedtst(spd):
         f"{result['ping']} \n"
         "✔️ ISP "
         f"{result['client']['isp']}"
-        "`"
+        "**"
     )
 
 
@@ -63,9 +62,9 @@ async def neardc(event):
     """ For .dc command, get the nearest datacenter information. """
     result = await event.client(functions.help.GetNearestDcRequest())
     await event.edit(
-        f"Negara              : `{result.country}`\n"
-        f"Pusat Data Terdekat : `{result.nearest_dc}`\n"
-        f"Pusat Data ini      : `{result.this_dc}`"
+        f"**Negara**     : `{result.country}`\n"
+        f"**Pusat Data Terdekat** : `{result.nearest_dc}`\n"
+        f"**Pusat Data**     : `{result.this_dc}`"
     )
 
 
@@ -73,10 +72,10 @@ async def neardc(event):
 async def pingme(pong):
     """ For .ping command, ping the userbot from any chat.  """
     start = datetime.now()
-    await pong.edit("`📶 PONGG❗️`")
+    await pong.edit("📶 **PONGG**❗️")
     end = datetime.now()
     duration = (end - start).microseconds / 1000
-    await pong.edit("`📶 PONGG❗️\n%sms`" % (duration))
+    await pong.edit("📶 **PONGG**❗️\n%s ms" % (duration))
 
 
 CMD_HELP.update(
